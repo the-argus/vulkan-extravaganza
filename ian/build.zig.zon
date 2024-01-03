@@ -1,0 +1,23 @@
+.{
+    .name = "vulkan-tutorial",
+    .version = "0.0.1",
+
+    .dependencies = .{
+        .compile_commands = .{
+            .url = "https://github.com/the-argus/zig-compile-commands/archive/090f6ca767de238f7eae4e13f91ecc7a299153c4.tar.gz",
+            .hash = "1220ad678342c3191edebd10df1a883b7a71e245d4ee91da26b7cf6b30e4ee8fb78d",
+        },
+        .natural_log = .{
+            .url = "https://github.com/the-argus/natural-log/archive/da726c022637d48fa421d07c9f9c89b9797db608.tar.gz",
+            .hash = "12208a27835d1483838b55f1e06cc4b6205779a46294cf3bcc934d543e64f234c90b",
+        },
+        .glm = .{
+            .url = "https://github.com/the-argus/glm/archive/91fa7a2557cdba434c7ba2239b27aff69bc1969f.tar.gz",
+            .hash = "122017bc5e3e273118a888b5e519fc31c6ebd71ee4fc667daeed18663aded87def24",
+        },
+        .kdutils = .{
+            .url = "https://github.com/the-argus/kdutils/archive/79769788d9e0f404b3e292788f516b1b352a7cf2.tar.gz",
+            .hash = "12200e06842a43f2a46ae7f785ebb06f0535856c4a60d1174f2a3292dde9bf21d2f6",
+        },
+    }
+}
