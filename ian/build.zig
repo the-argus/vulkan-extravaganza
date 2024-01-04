@@ -45,6 +45,18 @@ pub fn build(b: *std.Build) !void {
         }
     }
 
+    // add glm as dep
+    {
+        const glm_dep = b.dependency("glm", .{});
+
+        // its header only so we dont need to link, just add the install directory to our include path
+        exe.addIncludePath(.{
+            .path = b.pathJoin(&.{ glm_dep.builder.install_path, "include" }),
+        });
+
+        exe.step.dependOn(glm_dep.builder.getInstallStep());
+    }
+
     try targets.append(exe);
 
     b.installArtifact(exe);
