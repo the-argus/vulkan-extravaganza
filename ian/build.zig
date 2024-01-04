@@ -57,6 +57,17 @@ pub fn build(b: *std.Build) !void {
         exe.step.dependOn(glm_dep.builder.getInstallStep());
     }
 
+    // add kdgui as dep
+    {
+        const kdutils_dep = b.dependency("kdutils", .{
+            .target = target,
+            .optimize = optimize,
+        });
+
+        const kdgui = kdutils_dep.artifact("KDGui");
+        exe.linkLibrary(kdgui);
+    }
+
     try targets.append(exe);
 
     b.installArtifact(exe);
