@@ -15,9 +15,12 @@ pub fn build(b: *std.Build) !void {
     });
 
     exe.addCSourceFiles(&.{
-        "main.cpp"
+        "main.cpp",
     }, &.{
-        "-std=c++20"
+        "-std=c++20",
+        // no exceptions from natural log or fmt
+        "-DNATURAL_LOG_NOEXCEPT=noexcept",
+        "-DFMT_EXCEPTIONS=0",
     });
 
     exe.linkLibCpp();
@@ -30,6 +33,16 @@ pub fn build(b: *std.Build) !void {
         });
         const natural_log = log_dep.artifact("natural_log");
         exe.linkLibrary(natural_log);
+
+        for (natural_log.include_dirs.items) |dir| {
+            switch (dir) {
+                .path => |path| {
+                    try exe.include_dirs.append(std.Build.Step.Compile.IncludeDir{ .path = path.dupe(b) });
+                    path.addStepDependencies(&exe.step);
+                },
+                else => {},
+            }
+        }
     }
 
     try targets.append(exe);
